@@ -17,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author sergio
  */
-public class ServidorUI extends javax.swing.JFrame {
+public class CrearPreguntas extends javax.swing.JFrame {
 
     /**
      * Creates new form ServidorUI1
      */
-    public ServidorUI() {
+    public CrearPreguntas() {
         initComponents();
         this.quiz = new Quiz();
         opciones = new ArrayList<String>();
@@ -45,6 +45,7 @@ public class ServidorUI extends javax.swing.JFrame {
         backgroundPregunta = new javax.swing.JPanel();
         pregunta = new javax.swing.JPanel();
         txtPregunta = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
         txtOpc1 = new javax.swing.JTextField();
         lblOpc1 = new javax.swing.JLabel();
         txtOpc2 = new javax.swing.JTextField();
@@ -58,11 +59,13 @@ public class ServidorUI extends javax.swing.JFrame {
         txtValor = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPreguntas = new javax.swing.JTable();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         background.setBackground(new java.awt.Color(240, 244, 249));
+        background.setForeground(new java.awt.Color(153, 153, 153));
         background.setMinimumSize(new java.awt.Dimension(509, 258));
         background.setPreferredSize(new java.awt.Dimension(800, 509));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -73,6 +76,7 @@ public class ServidorUI extends javax.swing.JFrame {
         pregunta.setForeground(new java.awt.Color(0, 0, 0));
 
         txtPregunta.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        txtPregunta.setForeground(new java.awt.Color(204, 204, 204));
         txtPregunta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPregunta.setText("Digite la pregunta . . .");
         txtPregunta.setBorder(null);
@@ -83,7 +87,9 @@ public class ServidorUI extends javax.swing.JFrame {
             preguntaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(preguntaLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(txtPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(preguntaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator1))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         preguntaLayout.setVerticalGroup(
@@ -91,7 +97,9 @@ public class ServidorUI extends javax.swing.JFrame {
             .addGroup(preguntaLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(txtPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout backgroundPreguntaLayout = new javax.swing.GroupLayout(backgroundPregunta);
@@ -173,11 +181,21 @@ public class ServidorUI extends javax.swing.JFrame {
         });
         background.add(btnGurdar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, -1, -1));
 
-        btnSiguiente.setText("Siguiente");
+        btnSiguiente.setText("Iniciar");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
         background.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, -1, -1));
 
+        txtValor.setBackground(new java.awt.Color(240, 244, 249));
+        txtValor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtValor.setForeground(new java.awt.Color(102, 102, 102));
+        txtValor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtValor.setText("20");
-        background.add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, -1, 30));
+        txtValor.setBorder(null);
+        background.add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, 70, 30));
 
         tblPreguntas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -193,6 +211,7 @@ public class ServidorUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblPreguntas);
 
         background.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, 300, 460));
+        background.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 70, 10));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,6 +231,12 @@ public class ServidorUI extends javax.swing.JFrame {
         agregarPregunta();
         agregarATabla();
     }//GEN-LAST:event_btnGurdarActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        Lobby lobby = new Lobby();
+        lobby.setVisible(true);
+        CrearPreguntas.this.setVisible(false);
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void agregarATabla() {
         dtm.addRow(new Object[]{
@@ -257,14 +282,22 @@ public class ServidorUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ServidorUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearPreguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ServidorUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearPreguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ServidorUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearPreguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ServidorUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearPreguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -277,7 +310,7 @@ public class ServidorUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ServidorUI().setVisible(true);
+                new CrearPreguntas().setVisible(true);
             }
         });
     }
@@ -288,6 +321,8 @@ public class ServidorUI extends javax.swing.JFrame {
     private javax.swing.JButton btnGurdar;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblOpc1;
     private javax.swing.JLabel lblOpc2;
     private javax.swing.JLabel lblOpc3;
