@@ -2,6 +2,7 @@ package cuestionario;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,6 +13,7 @@ public class Quiz {
     private Scanner scanner;
     private int tiempoLimite = 5;
     private Timer temporizador = new Timer();
+    private int pin;
 
     public Quiz() {
         this.preguntas = new ArrayList<>();
@@ -32,28 +34,39 @@ public class Quiz {
     }
 
     public void mostrarPreguntas() {
-        System.out.println("Bienvenido al quiz!");
-        System.out.println("Presiona Enter para comenzar...");
-        scanner.nextLine();
-
+//        System.out.println("Bienvenido al quiz!");
+//        System.out.println("Presiona Enter para comenzar...");
+//        scanner.nextLine();
+        System.out.println(preguntas.size());
         for (Pregunta pregunta : preguntas) {
             System.out.println(pregunta.getPregunta());
-            List<String> opciones = pregunta.getOpciones();
-            for (int i = 0; i < opciones.size(); i++) {
-                System.out.println((i + 1) + ". " + opciones.get(i));
+            String[] opciones = pregunta.getOpciones();
+            for (int i = 0; i < opciones.length; i++) {
+                System.out.println((i + 1) + ". " + opciones[i]);
             }
 
             // iniciarTemporizador();
             System.out.print("R= ");
-            String respuesta = scanner.nextLine();
+//            String respuesta = scanner.nextLine();
 
-            boolean respuestaCorrecta = pregunta.verificaRespuesta(respuesta);
+            boolean respuestaCorrecta = pregunta.verificaRespuesta("s");
             System.out.println("Respuesta: " + (respuestaCorrecta ? "Correcta" : "Incorrecta"));
         }
     }
 
     public List<Pregunta> getP() {
         return preguntas;
+    }
+
+    public int getPin() {
+        Random random = new Random();
+        pin = 100000 + random.nextInt(900000);
+        return pin;
+    }
+
+    public int getCant() {
+        System.out.println("SIZE: " + preguntas.size());
+        return preguntas.size();
     }
 
     //Modificar las preguntas existentes

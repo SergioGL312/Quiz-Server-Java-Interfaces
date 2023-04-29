@@ -5,11 +5,11 @@ import java.util.List;
 public class Pregunta {
 
     private String pregunta;
-    private List<String> opciones;
+    private String[] opciones;
     private String respuestaCorrecta;
     private int valor;
 
-    public Pregunta(String pregunta, List<String> opciones, String respuestaCorrecta, int valor) {
+    public Pregunta(String pregunta, String[] opciones, String respuestaCorrecta, int valor) {
         this.pregunta = pregunta;
         this.opciones = opciones;
         this.respuestaCorrecta = respuestaCorrecta;
@@ -20,7 +20,7 @@ public class Pregunta {
         return pregunta;
     }
 
-    public List<String> getOpciones() {
+    public String[] getOpciones() {
         return opciones;
     }
 

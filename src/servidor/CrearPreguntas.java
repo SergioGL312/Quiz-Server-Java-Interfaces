@@ -5,13 +5,13 @@
  */
 package servidor;
 
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import java.util.ArrayList;
 import java.util.List;
-
 import cuestionario.*;
+import Cliente.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Metodos.TextPrompt;
 
 /**
  *
@@ -24,12 +24,15 @@ public class CrearPreguntas extends javax.swing.JFrame {
      */
     public CrearPreguntas() {
         initComponents();
-        this.quiz = new Quiz();
-        opciones = new ArrayList<String>();
-        
-        String[] cabezera = new String[] {"Pregunta", "Opciones", "Respuesta", "Valor"};
+        String[] cabezera = new String[]{"Pregunta", "Opciones", "Respuesta", "Valor"};
         dtm.setColumnIdentifiers(cabezera);
         tblPreguntas.setModel(dtm);
+        TextPrompt pregunta = new TextPrompt("Digite la pregunta . . .", txtPregunta);
+        TextPrompt o1 = new TextPrompt("Opción 1", txtOpc1);
+        TextPrompt o2 = new TextPrompt("Opción 2", txtOpc2);
+        TextPrompt o3 = new TextPrompt("Opción 3", txtOpc3);
+        TextPrompt o4 = new TextPrompt("Opción 4", txtOpc4);
+        TextPrompt valor = new TextPrompt("20", txtValor);
     }
 
     /**
@@ -41,17 +44,22 @@ public class CrearPreguntas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroup = new javax.swing.ButtonGroup();
         background = new javax.swing.JPanel();
         backgroundPregunta = new javax.swing.JPanel();
         pregunta = new javax.swing.JPanel();
         txtPregunta = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
+        rBtn1 = new javax.swing.JRadioButton();
         txtOpc1 = new javax.swing.JTextField();
         lblOpc1 = new javax.swing.JLabel();
+        rBtn2 = new javax.swing.JRadioButton();
         txtOpc2 = new javax.swing.JTextField();
         lblOpc2 = new javax.swing.JLabel();
+        rBtn3 = new javax.swing.JRadioButton();
         txtOpc3 = new javax.swing.JTextField();
         lblOpc3 = new javax.swing.JLabel();
+        rBtn4 = new javax.swing.JRadioButton();
         txtOpc4 = new javax.swing.JTextField();
         lblOpc4 = new javax.swing.JLabel();
         btnGurdar = new javax.swing.JButton();
@@ -76,9 +84,8 @@ public class CrearPreguntas extends javax.swing.JFrame {
         pregunta.setForeground(new java.awt.Color(0, 0, 0));
 
         txtPregunta.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
-        txtPregunta.setForeground(new java.awt.Color(204, 204, 204));
-        txtPregunta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtPregunta.setText("Digite la pregunta . . .");
+        txtPregunta.setForeground(new java.awt.Color(0, 0, 0));
+        txtPregunta.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtPregunta.setBorder(null);
 
         javax.swing.GroupLayout preguntaLayout = new javax.swing.GroupLayout(pregunta);
@@ -125,9 +132,12 @@ public class CrearPreguntas extends javax.swing.JFrame {
 
         background.add(backgroundPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 810, -1));
 
+        btnGroup.add(rBtn1);
+        background.add(rBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
+
         txtOpc1.setBackground(new java.awt.Color(215, 26, 57));
         txtOpc1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        txtOpc1.setText("opción 1");
+        txtOpc1.setForeground(new java.awt.Color(0, 0, 0));
         txtOpc1.setBorder(null);
         background.add(txtOpc1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 252, 310, 60));
 
@@ -137,9 +147,12 @@ public class CrearPreguntas extends javax.swing.JFrame {
         lblOpc1.setOpaque(true);
         background.add(lblOpc1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 380, 80));
 
+        btnGroup.add(rBtn2);
+        background.add(rBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 270, -1, -1));
+
         txtOpc2.setBackground(new java.awt.Color(18, 96, 190));
         txtOpc2.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        txtOpc2.setText("opción 2");
+        txtOpc2.setForeground(new java.awt.Color(0, 0, 0));
         txtOpc2.setBorder(null);
         background.add(txtOpc2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 320, 60));
 
@@ -149,9 +162,12 @@ public class CrearPreguntas extends javax.swing.JFrame {
         lblOpc2.setOpaque(true);
         background.add(lblOpc2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 380, 80));
 
+        btnGroup.add(rBtn3);
+        background.add(rBtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, -1, -1));
+
         txtOpc3.setBackground(new java.awt.Color(199, 146, 0));
         txtOpc3.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        txtOpc3.setText("opción 3");
+        txtOpc3.setForeground(new java.awt.Color(0, 0, 0));
         txtOpc3.setBorder(null);
         background.add(txtOpc3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 320, 60));
 
@@ -161,9 +177,12 @@ public class CrearPreguntas extends javax.swing.JFrame {
         lblOpc3.setOpaque(true);
         background.add(lblOpc3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 380, 80));
 
+        btnGroup.add(rBtn4);
+        background.add(rBtn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 370, -1, -1));
+
         txtOpc4.setBackground(new java.awt.Color(35, 126, 11));
         txtOpc4.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        txtOpc4.setText("opción 4");
+        txtOpc4.setForeground(new java.awt.Color(0, 0, 0));
         txtOpc4.setBorder(null);
         background.add(txtOpc4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 320, 60));
 
@@ -173,6 +192,7 @@ public class CrearPreguntas extends javax.swing.JFrame {
         lblOpc4.setOpaque(true);
         background.add(lblOpc4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 380, 80));
 
+        btnGurdar.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         btnGurdar.setText("Guardar");
         btnGurdar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,6 +201,7 @@ public class CrearPreguntas extends javax.swing.JFrame {
         });
         background.add(btnGurdar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, -1, -1));
 
+        btnSiguiente.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         btnSiguiente.setText("Iniciar");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,12 +212,17 @@ public class CrearPreguntas extends javax.swing.JFrame {
 
         txtValor.setBackground(new java.awt.Color(240, 244, 249));
         txtValor.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        txtValor.setForeground(new java.awt.Color(102, 102, 102));
-        txtValor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtValor.setText("20");
+        txtValor.setForeground(new java.awt.Color(0, 0, 0));
+        txtValor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtValor.setBorder(null);
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorKeyTyped(evt);
+            }
+        });
         background.add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, 70, 30));
 
+        tblPreguntas.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         tblPreguntas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -230,41 +256,109 @@ public class CrearPreguntas extends javax.swing.JFrame {
     private void btnGurdarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGurdarActionPerformed
         agregarPregunta();
         agregarATabla();
+        limpiarCampos();
     }//GEN-LAST:event_btnGurdarActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        Lobby lobby = new Lobby();
-        lobby.setVisible(true);
-        CrearPreguntas.this.setVisible(false);
+        if (hayPreguntas()) {
+            Lobby lobby = new Lobby(servidor);
+            lobby.setVisible(true);
+            CrearPreguntas.this.setVisible(false);
+        }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
-    private void agregarATabla() {
-        dtm.addRow(new Object[]{
-            txtPregunta.getText(),
-            opciones,
-            "2",
-            txtValor.getText()
-        });
-    }
-    
-    private void agregarPregunta() {
-        String pregunta = txtPregunta.getText();
-
-        int valor = Integer.parseInt(txtValor.getText());
-
-        opciones.add(txtOpc1.getText());
-
-        opciones.add(txtOpc2.getText());
-
-        opciones.add(txtOpc3.getText());
-
-        opciones.add(txtOpc4.getText());
-
+    private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
+        char validar = evt.getKeyChar();
         
-        Pregunta p = new Pregunta(pregunta, opciones, "2", valor);
-        quiz.agregarPregunta(p);
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Digite solo numeros", "PELIGRO", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtValorKeyTyped
+
+    private void agregarATabla() {
+        List<Pregunta> preguntas = servidor.getQuiz().getP();
+        dtm.setRowCount(0);
+        for (Pregunta pregunta : preguntas) {
+            String opciones = String.join(",", pregunta.getOpciones());
+            dtm.addRow(new Object[]{
+                pregunta.getPregunta(),
+                opciones,
+                pregunta.getRespuestaCorrecta(),
+                pregunta.getValor()
+            });
+        }
+    }
+
+    private void agregarPregunta() {
+        if (camposLlenados()) {
+            String pregunta = txtPregunta.getText();
+
+            int valor = Integer.parseInt(txtValor.getText());
+
+            opciones[0] = txtOpc1.getText();
+
+            opciones[1] = txtOpc2.getText();
+
+            opciones[2] = txtOpc3.getText();
+
+            opciones[3] = txtOpc4.getText();
+
+            if (obtenerRespuesta()) {
+                servidor.agregarPregunta(pregunta, opciones, respuesta, valor);
+            }
+        }
+    }
+
+    private boolean obtenerRespuesta() {
+        if (!rBtn1.isSelected() && !rBtn2.isSelected() && !rBtn3.isSelected()
+                && !rBtn4.isSelected()) {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Seleccione la respuesta que sera la correcta", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (rBtn1.isSelected()) {
+            respuesta = txtOpc1.getText();
+        } else if (rBtn2.isSelected()) {
+            respuesta = txtOpc2.getText();
+        } else if (rBtn3.isSelected()) {
+            respuesta = txtOpc3.getText();
+        } else if (rBtn4.isSelected()) {
+            respuesta = txtOpc4.getText();
+        }
+        return true;
+    }
+
+    private boolean camposLlenados() {
+        if (!txtPregunta.getText().isEmpty() && !txtOpc1.getText().isEmpty()
+                && !txtOpc2.getText().isEmpty() && !txtOpc3.getText().isEmpty()
+                && !txtOpc4.getText().isEmpty() && !txtValor.getText().isEmpty()) {
+            return true;
+        }
+        getToolkit().beep();
+        JOptionPane.showMessageDialog(null, "Llene todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+    private boolean hayPreguntas() {
+        if (servidor.getQuiz().getCant() > 0) {
+            return true;
+        }
+        getToolkit().beep();
+        JOptionPane.showMessageDialog(null, "No hay ninguna pregunta guardada", "ERROR", JOptionPane.ERROR_MESSAGE);
+        return false;
     }
     
+    private void limpiarCampos() {
+        txtPregunta.setText("");
+        txtOpc1.setText("");
+        txtOpc2.setText("");
+        txtOpc3.setText("");
+        txtOpc4.setText("");
+        txtValor.setText("");
+        btnGroup.clearSelection();
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -290,22 +384,6 @@ public class CrearPreguntas extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CrearPreguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -318,6 +396,7 @@ public class CrearPreguntas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JPanel backgroundPregunta;
+    private javax.swing.ButtonGroup btnGroup;
     private javax.swing.JButton btnGurdar;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JScrollPane jScrollPane1;
@@ -328,6 +407,10 @@ public class CrearPreguntas extends javax.swing.JFrame {
     private javax.swing.JLabel lblOpc3;
     private javax.swing.JLabel lblOpc4;
     private javax.swing.JPanel pregunta;
+    private javax.swing.JRadioButton rBtn1;
+    private javax.swing.JRadioButton rBtn2;
+    private javax.swing.JRadioButton rBtn3;
+    private javax.swing.JRadioButton rBtn4;
     private javax.swing.JTable tblPreguntas;
     private javax.swing.JTextField txtOpc1;
     private javax.swing.JTextField txtOpc2;
@@ -336,7 +419,9 @@ public class CrearPreguntas extends javax.swing.JFrame {
     private javax.swing.JTextField txtPregunta;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
-    Quiz quiz;
-    List<String> opciones;
+    Quiz quiz = new Quiz();
+    String[] opciones = new String[4];
     DefaultTableModel dtm = new DefaultTableModel();
+    Servidor servidor = new Servidor();
+    private static String respuesta;
 }
