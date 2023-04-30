@@ -173,13 +173,6 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator2">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="110" y="480" width="70" height="10"/>
-            </Constraint>
-          </Constraints>
-        </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>

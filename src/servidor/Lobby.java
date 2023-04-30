@@ -5,10 +5,11 @@
  */
 package servidor;
 
-import cuestionario.Quiz;
 import java.net.InetAddress;
 import javax.swing.JOptionPane;
 import cuestionario.Jugador;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author sergio
  */
-public class Lobby extends javax.swing.JFrame {
+public class Lobby extends javax.swing.JFrame implements PropertyChangeListener {
 
     Servidor s;
 
@@ -28,6 +29,7 @@ public class Lobby extends javax.swing.JFrame {
         String[] cabezera = new String[]{"Nombre Jugador"};
         dtm.setColumnIdentifiers(cabezera);
         tbl.setModel(dtm);
+        servidor.addPropertyChangeListener(this);
     }
 
     /**
@@ -46,7 +48,6 @@ public class Lobby extends javax.swing.JFrame {
         lblIpHost = new javax.swing.JLabel();
         btnPin = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl = new javax.swing.JTable();
 
@@ -120,7 +121,6 @@ public class Lobby extends javax.swing.JFrame {
             }
         });
         background.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, -1, -1));
-        background.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 70, 10));
 
         tbl.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         tbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -153,24 +153,22 @@ public class Lobby extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPinActionPerformed
-        // s.iniciarServidor();
+        btnPin.setEnabled(false);
         Thread hilo = new Thread(new Runnable() {
             @Override
             public void run() {
                 s.iniciarServidor();
-                actualizarTabla();
-
             }
         });
         hilo.start();
     }//GEN-LAST:event_btnPinActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        // FALTA
+        
     }//GEN-LAST:event_btnSiguienteActionPerformed
-
+    
     public void actualizarTabla() {
-        listaJugadores = s.getJugadores();
+        // listaJugadores = s.getJugadores();
         dtm.setRowCount(0);
         for (Jugador jugador : listaJugadores) {
             String[] fila = new String[]{jugador.getNombreJugador()};
@@ -191,6 +189,14 @@ public class Lobby extends javax.swing.JFrame {
         lblPIN.setText(Integer.toString(s.getQuiz().getPin()));
     }
 
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("jugadores")) {
+            listaJugadores = (List<Jugador>) evt.getNewValue();
+            actualizarTabla();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -234,12 +240,10 @@ public class Lobby extends javax.swing.JFrame {
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblIpHost;
     private javax.swing.JLabel lblPIN;
     private javax.swing.JTable tbl;
     // End of variables declaration//GEN-END:variables
     private List<Jugador> listaJugadores;
     DefaultTableModel dtm = new DefaultTableModel();
-
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import cuestionario.Jugador;
 import cuestionario.Pregunta;
 import cuestionario.Quiz;
+import java.beans.PropertyChangeSupport;
 
 public class Servidor {
 
@@ -19,9 +20,10 @@ public class Servidor {
 
     private List<Jugador> listaJugadores;
     private Quiz quiz = new Quiz();
-
+    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     public Servidor() {
         this.listaJugadores = new ArrayList<Jugador>();
+        this.pcs.firePropertyChange("jugadores", null, listaJugadores);
     }
 
     public void iniciarServidor() {
@@ -55,6 +57,7 @@ public class Servidor {
         if (!encontrado) {
             System.out.println("[ + ] Jugador agregado a la lista de jugadores: " + jugador.getNombreJugador());
             listaJugadores.add(jugador);
+            pcs.firePropertyChange("jugadores", null, listaJugadores);
         }
         return encontrado;
     }
@@ -88,6 +91,10 @@ public class Servidor {
 
     public Quiz getQuiz() {
         return this.quiz;
+    }
+
+    public void addPropertyChangeListener(Lobby aThis) {
+        pcs.addPropertyChangeListener(aThis);
     }
 
 }
@@ -128,7 +135,7 @@ class ManejadorDeCliente implements Runnable {
                     salida.writeUTF("ok");
                 }
             }
-
+            
             List<Pregunta> preguntas = servidor.getQuiz().getP();
             Iterator<Pregunta> iterPreguntas = preguntas.iterator();
             salida.writeInt(preguntas.size());
