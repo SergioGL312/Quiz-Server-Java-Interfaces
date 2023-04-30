@@ -164,8 +164,12 @@ public class Lobby extends javax.swing.JFrame implements PropertyChangeListener 
     }//GEN-LAST:event_btnPinActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        
+       bandera = true;
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    public boolean getBandera() {
+        return bandera;
+    }
     
     public void actualizarTabla() {
         // listaJugadores = s.getJugadores();
@@ -196,7 +200,7 @@ public class Lobby extends javax.swing.JFrame implements PropertyChangeListener 
             actualizarTabla();
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -246,4 +250,5 @@ public class Lobby extends javax.swing.JFrame implements PropertyChangeListener 
     // End of variables declaration//GEN-END:variables
     private List<Jugador> listaJugadores;
     DefaultTableModel dtm = new DefaultTableModel();
+    private static boolean bandera = false;
 }

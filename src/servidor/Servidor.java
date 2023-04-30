@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import cuestionario.Jugador;
+import cuestionario.ManejadorDeCliente;
 import cuestionario.Pregunta;
 import cuestionario.Quiz;
 import java.beans.PropertyChangeSupport;
@@ -17,7 +18,7 @@ import java.beans.PropertyChangeSupport;
 public class Servidor {
 
     private static final int PUERTO = 1090;
-
+    
     private List<Jugador> listaJugadores;
     private Quiz quiz = new Quiz();
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
@@ -99,7 +100,7 @@ public class Servidor {
 
 }
 
-class ManejadorDeCliente implements Runnable {
+/*class ManejadorDeCliente implements Runnable {
 
     private final Socket clienteSocket;
     private final Servidor servidor;
@@ -135,7 +136,7 @@ class ManejadorDeCliente implements Runnable {
                     salida.writeUTF("ok");
                 }
             }
-            
+            /*
             List<Pregunta> preguntas = servidor.getQuiz().getP();
             Iterator<Pregunta> iterPreguntas = preguntas.iterator();
             salida.writeInt(preguntas.size());
@@ -166,4 +167,4 @@ class ManejadorDeCliente implements Runnable {
             servidor.getNombreJugadores();
         }
     }
-}
+}*/
