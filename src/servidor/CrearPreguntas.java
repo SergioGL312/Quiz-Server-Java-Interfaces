@@ -256,7 +256,7 @@ public class CrearPreguntas extends javax.swing.JFrame {
     private void btnGurdarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGurdarActionPerformed
         agregarPregunta();
         agregarATabla();
-        limpiarCampos();
+        // limpiarCampos();
     }//GEN-LAST:event_btnGurdarActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
@@ -307,6 +307,7 @@ public class CrearPreguntas extends javax.swing.JFrame {
 
             if (obtenerRespuesta()) {
                 servidor.agregarPregunta(pregunta, opciones, respuesta, valor);
+                limpiarCampos();
             }
         }
     }

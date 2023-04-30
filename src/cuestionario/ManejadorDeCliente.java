@@ -58,7 +58,7 @@ public class ManejadorDeCliente implements Runnable {
             }
 
             while (true) {
-                System.out.println("W");
+                System.out.print("");
                 if (l.getBandera()) {
                     List<Pregunta> preguntas = servidor.getQuiz().getP();
                     Iterator<Pregunta> iterPreguntas = preguntas.iterator();
