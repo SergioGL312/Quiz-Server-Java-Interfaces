@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cuestionario;
+package servidor;
 
+import cuestionario.Jugador;
+import cuestionario.Pregunta;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Iterator;
 import java.util.List;
-import servidor.Lobby;
-import servidor.Servidor;
 
 /**
  *
@@ -38,6 +38,13 @@ public class ManejadorDeCliente implements Runnable {
     @Override
     public void run() {
         try {
+            int PIN = entrada.readInt();
+            while (servidor.getQuiz().getPin() != PIN) {
+                salida.writeUTF("NOPIN");
+                PIN = entrada.readInt();
+            }
+            salida.writeUTF("PIN");
+            System.out.println("bien");
             Jugador jugador = null;
 
             while (jugador == null) {

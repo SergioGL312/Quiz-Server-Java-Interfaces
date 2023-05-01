@@ -25,7 +25,6 @@ public class Lobby extends javax.swing.JFrame implements PropertyChangeListener 
         this.s = servidor;
         initComponents();
         setIP();
-        setPin();
         String[] cabezera = new String[]{"Nombre Jugador"};
         dtm.setColumnIdentifiers(cabezera);
         tbl.setModel(dtm);
@@ -115,6 +114,7 @@ public class Lobby extends javax.swing.JFrame implements PropertyChangeListener 
 
         btnSiguiente.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         btnSiguiente.setText("Siguiente");
+        btnSiguiente.setEnabled(false);
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
@@ -153,6 +153,8 @@ public class Lobby extends javax.swing.JFrame implements PropertyChangeListener 
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPinActionPerformed
+        setPin();
+        btnSiguiente.setEnabled(true);
         btnPin.setEnabled(false);
         Thread hilo = new Thread(new Runnable() {
             @Override
@@ -164,13 +166,13 @@ public class Lobby extends javax.swing.JFrame implements PropertyChangeListener 
     }//GEN-LAST:event_btnPinActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-       bandera = true;
+        bandera = true;
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     public boolean getBandera() {
         return bandera;
     }
-    
+
     public void actualizarTabla() {
         // listaJugadores = s.getJugadores();
         dtm.setRowCount(0);
@@ -190,6 +192,7 @@ public class Lobby extends javax.swing.JFrame implements PropertyChangeListener 
     }
 
     private void setPin() {
+        s.getQuiz().generarPin();
         lblPIN.setText(Integer.toString(s.getQuiz().getPin()));
     }
 

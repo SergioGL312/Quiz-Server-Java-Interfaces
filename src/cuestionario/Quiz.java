@@ -58,14 +58,16 @@ public class Quiz {
         return preguntas;
     }
 
-    public int getPin() {
+    public void generarPin() {
         Random random = new Random();
         pin = 100000 + random.nextInt(900000);
+    }
+    
+    public int getPin() {
         return pin;
     }
 
     public int getCant() {
-        System.out.println("SIZE: " + preguntas.size());
         return preguntas.size();
     }
 

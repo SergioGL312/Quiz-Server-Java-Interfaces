@@ -1,7 +1,5 @@
 package cuestionario;
 
-import java.util.List;
-
 public class Pregunta {
 
     private String pregunta;

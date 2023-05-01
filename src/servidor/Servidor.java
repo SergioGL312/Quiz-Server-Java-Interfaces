@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import cuestionario.Jugador;
-import cuestionario.ManejadorDeCliente;
 import cuestionario.Pregunta;
 import cuestionario.Quiz;
 import java.beans.PropertyChangeSupport;
@@ -18,17 +17,18 @@ import java.beans.PropertyChangeSupport;
 public class Servidor {
 
     private static final int PUERTO = 1090;
-    
+
     private List<Jugador> listaJugadores;
     private Quiz quiz = new Quiz();
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+
     public Servidor() {
         this.listaJugadores = new ArrayList<Jugador>();
         this.pcs.firePropertyChange("jugadores", null, listaJugadores);
     }
 
     public void iniciarServidor() {
-        
+
         try (ServerSocket servidor = new ServerSocket(PUERTO)) {
             System.out.println("[ + ] Servidor iniciado. Esperando conexiones . . .\n");
 
@@ -69,7 +69,7 @@ public class Servidor {
             System.out.println(jugador.getNombreJugador());
         }
     }
-    
+
     public List<Jugador> getJugadores() {
         return listaJugadores;
     }
@@ -80,6 +80,7 @@ public class Servidor {
             if (jugador.getNombreJugador().equals(nombreJugador)) {
                 iter.remove();
                 System.out.println("[ - ] Jugador eliminado de la lista de jugadores: " + nombreJugador);
+                pcs.firePropertyChange("jugadores", null, listaJugadores);
                 break;
             }
         }
