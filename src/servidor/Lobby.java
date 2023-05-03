@@ -169,7 +169,7 @@ public class Lobby extends javax.swing.JFrame implements PropertyChangeListener 
         bandera = true;
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
-    public boolean getBandera() {
+    public synchronized boolean getBandera() {
         return bandera;
     }
 

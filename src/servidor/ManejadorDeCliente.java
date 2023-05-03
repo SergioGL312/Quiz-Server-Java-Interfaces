@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -65,7 +67,6 @@ public class ManejadorDeCliente implements Runnable {
             }
 
             while (true) {
-                System.out.print("");
                 if (l.getBandera()) {
                     List<Pregunta> preguntas = servidor.getQuiz().getP();
                     Iterator<Pregunta> iterPreguntas = preguntas.iterator();
@@ -92,6 +93,7 @@ public class ManejadorDeCliente implements Runnable {
                     
                     break;
                 }
+                Thread.sleep(100);
             }
             servidor.eliminarJugador(nombreUsuario);
         } catch (IOException e) {
@@ -99,6 +101,8 @@ public class ManejadorDeCliente implements Runnable {
                     "[ * ] El cliente " + clienteSocket.getRemoteSocketAddress() + " ha cerrado la conexion.\n");
             servidor.eliminarJugador(nombreUsuario);
             servidor.getNombreJugadores();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ManejadorDeCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
